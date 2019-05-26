@@ -8,6 +8,21 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
+import moment from 'moment';
+
+import Swal from 'sweetalert2'
+window.Swal = Swal;
+
+const Toast = Swal.mixin({
+  toast: true,
+  position: 'top-end',
+  showConfirmButton: false,
+  timer: 3000
+});
+
+window.Toast = Toast;
+
+
 import VueRouter from 'vue-router';
 Vue.use(VueRouter);
 
@@ -16,6 +31,14 @@ import axios from 'axios';
 
 import App from './App.vue';
 Vue.use(VueAxios, axios);
+
+import VueProgressBar from 'vue-progressbar'
+Vue.use(VueProgressBar, {
+  color: 'rgb(143, 255, 199)',
+  failedColor: 'red',
+  height: '3px'
+})
+
 
 import HomeComponent from './components/HomeComponent.vue';
 import CreateComponent from './components/CreateComponent.vue';
@@ -45,6 +68,9 @@ const routes = [
   }
 ];
 
+Vue.filter('upText',function(text){
+  return text.charAt(0).toUpperCase()+text.slice(1)
+});
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -67,3 +93,10 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 
 const router = new VueRouter({ mode: 'history', routes: routes});
 const app = new Vue(Vue.util.extend({ router }, App)).$mount('#app');
+
+
+
+Vue.filter('myDate',function(created){
+  return moment(created).format('MMMM Do YYYY');
+});
+

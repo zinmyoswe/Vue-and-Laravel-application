@@ -36,10 +36,18 @@
     },
     methods: {
       addPost(){
+         this.$Progress.start();
          let uri = 'api/post/create';
+         Toast.fire({
+         type: 'success',
+         title: 'User Created in successfully'
+         })
+
+         this.$Progress.finish();
           this.axios.post(uri, this.post).then((response) => {
              this.$router.push({name: 'posts'});
           });
+
       }
     }
   }
