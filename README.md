@@ -2,6 +2,7 @@
 Vue and Laravel 5.7 application with axios, moment.js, vue-progress bar, sweetalert 2, Firebase
 
 ##Note
+
 `npm install`
 
 `npm run dev`
